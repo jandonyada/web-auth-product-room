@@ -21,11 +21,14 @@ router.post('/register', async (req, res) => {
   // **** START CODE HERE ****
 
   // Step 1: Generate salt
+  const salt = generateSalt()
 
   // Step 2: Hash the password using helper function with salt
+  const passwordHash = hashWithSaltManyTimes(password, salt)
 
   // Step 3: Store the username, hash and salt
   // Hint: use `await createPwUser(username, passwordHash, salt)` to store the user
+  await createPwUser(username, passwordHash, salt)
 
   // **** END CODE HERE ****
   return res.json({ message: 'User registered successfully!' })
